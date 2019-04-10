@@ -1,0 +1,6 @@
+#ifndef GAMEMENUITEMS_H
+#define GAMEMENUITEMS_H
+
+enum GameMenuItems { START = 1, SETTINGS = 2, END = 3, SETTINGS_BACK = 4 };
+
+#endif // GAMEMENUITEMS_H
