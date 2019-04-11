@@ -1,10 +1,4 @@
 #include "mainwindow.h"
-#include "ui_mainwindow.h"
-#include <QPainter>
-#include <QMouseEvent>
-#include <QRect>
-#include <QSize>
-#include<iostream>
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -31,20 +25,11 @@ void MainWindow::paintEvent(QPaintEvent *e)
 
     QPainter painter(this);
 
-    if (gameOver) {
-
-//    finishGame(&painter, "Game lost");
-
-    } else if(gameWon) {
-        painter.drawText(100, 100, "WYGRAŚŚŚŚKOW");
-//    finishGame(&painter, "Victory");
+    if(gameWon) {
+        painter.drawText(100, 100, "Wygrana!!");
     }
     else {
-
-    drawObjects(&painter);
-//    if(checkWinCondition()) {
-//            painter.drawText(100, 100, "WYGRAŚŚŚŚKOW");
-//    }
+        drawObjects(&painter);
     }
 }
 
@@ -53,6 +38,13 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
     if (event->button() == Qt::LeftButton) {
             emit checkIntersections(event->pos());
     }
+}
+
+void MainWindow::startNewGame(vector<vector<Block*>> board)
+{
+    gameWon = false;
+    blocks = board;
+    this->repaint();
 }
 
 void MainWindow::drawBoard(vector<vector<Block*>> board)
@@ -64,6 +56,12 @@ void MainWindow::drawBoard(vector<vector<Block*>> board)
 void MainWindow::handleRedraw(vector<vector<Block *> > board)
 {
     drawBoard(board);
+}
+
+void MainWindow::handleGameWon()
+{
+    gameWon = true;
+    this->repaint();
 }
 
 
@@ -79,3 +77,8 @@ void MainWindow::drawObjects(QPainter *painter) {
 }
 
 
+
+void MainWindow::on_backToMenuButton_clicked()
+{
+    emit goBackToMenu(GAME_BOARD_BACK);
+}

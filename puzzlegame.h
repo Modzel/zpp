@@ -2,7 +2,7 @@
 #define PUZZLEGAME_H
 
 #include <QObject>
-#include "board.h"
+#include <QSound>
 #include "boardfactory.h"
 #include "gamemenu.h"
 #include "gamesettings.h"
@@ -28,9 +28,10 @@ private:
     BoardFactory boardFactory;
 
     bool isNeighbourEmpty(int i, int j, int xEmpty, int yEmpty);
-    bool checkWinCondition();
+    void checkWinCondition();
 signals:
     void redrawBoard(vector<vector<Block*>> board);
+    void userWon();
 private slots:
     void receive_from_gui(GameMenuItems option);
     void checkIintersections(QPoint point);

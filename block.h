@@ -14,22 +14,15 @@ class Block : public QObject
 public:
     Block(int, int, int);
     ~Block();
-
-    bool isDestroyed();
-    void setDestroyed(bool);
     QRect getRect();
     void setRect(QRect);
-    QImage & getImage();
     QString getBlockNumber();
     void setBlockNumber(QString);
     
 private:
     QString block_number;
     string name;
-    QImage image;
     QRect rect;
-
-    bool destroyed;
 
 signals:
 

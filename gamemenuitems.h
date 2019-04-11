@@ -1,6 +1,6 @@
 #ifndef GAMEMENUITEMS_H
 #define GAMEMENUITEMS_H
 
-enum GameMenuItems { START = 1, SETTINGS = 2, END = 3, SETTINGS_BACK = 4 };
+enum GameMenuItems { START = 1, SETTINGS = 2, END = 3, SETTINGS_BACK = 4, GAME_BOARD_BACK = 5 };
 
 #endif // GAMEMENUITEMS_H

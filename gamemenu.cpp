@@ -1,5 +1,4 @@
 #include "gamemenu.h"
-#include "ui_gamemenu.h"
 
 GameMenu::GameMenu(QWidget *parent) :
     QMainWindow(parent),
@@ -22,4 +21,9 @@ void GameMenu::on_buttonGame_clicked()
 void GameMenu::on_buttonSettings_clicked()
 {
     emit menu_option_selected(SETTINGS);
+}
+
+void GameMenu::on_buttonEnd_clicked()
+{
+    exit(EXIT_SUCCESS);
 }

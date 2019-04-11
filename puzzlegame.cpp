@@ -8,17 +8,15 @@ PuzzleGame::PuzzleGame()
     connect(&sm,SIGNAL(sound_setting_changed(int)),&gameSettings,SLOT(sound_changed(int)));
     connect(&w,SIGNAL(checkIntersections(QPoint)),this,SLOT(checkIintersections(QPoint)));
     connect(this,SIGNAL(redrawBoard(vector<vector<Block*>>)),&w,SLOT(handleRedraw(vector<vector<Block*>>)));
+    connect(&w,SIGNAL(goBackToMenu(GameMenuItems)),this,SLOT(receive_from_gui(GameMenuItems)));
+    connect(this,SIGNAL(userWon()),&w,SLOT(handleGameWon()));
 
     board = NULL;
 }
 
 void PuzzleGame::showMenu()
 {
-    gm.resize(500, 600);
     gm.show();
-
-
-
 }
 
 void PuzzleGame::receive_from_gui(GameMenuItems option)
@@ -27,17 +25,19 @@ void PuzzleGame::receive_from_gui(GameMenuItems option)
         case START:
             board = boardFactory.getBoard(gameSettings.getNumberOfBlocks());
             gm.hide();
-            w.drawBoard(board->getBoard());
-            w.resize(500, 600);
+            w.startNewGame(board->getBoard());
             w.show();
             break;
         case SETTINGS:
             gm.hide();
-            sm.resize(500, 600);
             sm.show();
             break;
         case SETTINGS_BACK:
             sm.hide();
+            gm.show();
+            break;
+        case GAME_BOARD_BACK:
+            w.hide();
             gm.show();
             break;
     }
@@ -46,7 +46,6 @@ void PuzzleGame::receive_from_gui(GameMenuItems option)
 
 void PuzzleGame::checkIintersections(QPoint point)
 {
-    w.drawBoard(board->getBoard());
     int xEmpty = board->getXEmpty();
     int yEmpty = board->getYEmpty();
     vector<vector<Block *> > blocks = board->getBoard();
@@ -58,7 +57,11 @@ void PuzzleGame::checkIintersections(QPoint point)
               blocks[i][j]->setBlockNumber(NULL);
               blocks[xEmpty][yEmpty]->setBlockNumber(tmp);
               board->setBlockMatrix(blocks);
+              if(gameSettings.getIsSoundOn()){
+                  QSound::play("./dzwiek.wav");
+              }
               emit redrawBoard(blocks);
+              checkWinCondition();
               return;
           }
         }
@@ -81,7 +84,7 @@ bool PuzzleGame::isNeighbourEmpty(int i, int j, int xEmpty, int yEmpty)
     return false;
 }
 
-bool PuzzleGame::checkWinCondition()
+void PuzzleGame::checkWinCondition()
 {
     vector<vector<Block *> > blocks = board->getBoard();
     int k = 1;
@@ -93,11 +96,10 @@ bool PuzzleGame::checkWinCondition()
                   k++;
               }
               else {
-                 return false;
+                 return;
               }
           }
       }
     }
-
-    return true;
+    emit userWon();
 }

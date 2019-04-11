@@ -2,7 +2,7 @@
 #define BOARD_H
 
 #include <QObject>
-#include <block.h>
+#include "block.h"
 
 class Board : public QObject
 {

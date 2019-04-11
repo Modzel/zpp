@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "gamemenuitems.h"
+#include "ui_settingsmenu.h"
 
 namespace Ui {
 class SettingsMenu;

@@ -24,7 +24,7 @@ int Board::getXEmpty()
 
 int Board::getYEmpty()
 {
-    return xEmpty;
+    return yEmpty;
 }
 
 void Board::recalculateEmptyPosition()

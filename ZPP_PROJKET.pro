@@ -4,7 +4,7 @@
 #
 #-------------------------------------------------
 
-QT       += core gui
+QT       += core gui multimedia
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -44,7 +44,8 @@ HEADERS += \
     settingsmenu.h \
     gamesettings.h \
     board.h \
-    boardfactory.h
+    boardfactory.h \
+
 
 FORMS += \
         mainwindow.ui \
@@ -57,4 +58,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 DISTFILES += \
-    brickie.png
+    dzwiek.wav

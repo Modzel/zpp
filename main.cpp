@@ -1,5 +1,3 @@
-#include "gamemenu.h"
-#include "mainwindow.h"
 #include "puzzlegame.h"
 #include <QApplication>
 

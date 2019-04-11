@@ -3,6 +3,7 @@
 
 #include <qmainwindow.h>
 #include "gamemenuitems.h"
+#include "ui_gamemenu.h"
 
 namespace Ui {
 class GameMenu;
@@ -23,6 +24,8 @@ private slots:
     void on_buttonGame_clicked();
 
     void on_buttonSettings_clicked();
+
+    void on_buttonEnd_clicked();
 
 private:
     Ui::GameMenu *ui;

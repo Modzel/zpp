@@ -4,7 +4,6 @@
 #include "board.h"
 
 #include <QObject>
-#include <block.h>
 
 class BoardFactory : public QObject
 {
